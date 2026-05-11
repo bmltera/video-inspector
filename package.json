@@ -69,7 +69,7 @@
       "shortcutName": "Video Inspector",
       "uninstallDisplayName": "Video Inspector",
       "runAfterFinish": true,
-      "requestedExecutionLevel": "asInvoker"
+      "allowElevation": false
     }
   }
 }
