@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Video Inspector</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">VI</div>
+        <div>
+          <h1>Video Inspector</h1>
+          <p>Camera, codec, color, lens & gyro clues</p>
+        </div>
+      </div>
+      <button id="openBtn" class="primary">Open video file</button>
+      <div class="tools" id="toolsStatus">Checking tools…</div>
+      <div class="hint">
+        Best results with FFprobe + ExifTool + MediaInfo installed or bundled. Drop MOV/MP4/MXF/MKV/BRAW/R3D/etc.
+      </div>
+    </aside>
+
+    <main>
+      <section id="dropZone" class="drop-zone">
+        <div class="drop-inner">
+          <div class="drop-icon">▣</div>
+          <h2>Drop a video file here</h2>
+          <p>Instant easy-to-read technical report for post-production.</p>
+        </div>
+      </section>
+
+      <section id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <div>
+          <h2>Inspecting file…</h2>
+          <p>Reading container, streams, metadata, side-data, and telemetry clues.</p>
+        </div>
+      </section>
+
+      <section id="report" class="report hidden">
+        <div class="report-header">
+          <div>
+            <h2 id="fileName">No file</h2>
+            <p id="filePath"></p>
+          </div>
+          <button id="showInFolder" class="ghost">Show in folder</button>
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-card camera"><span>Camera</span><strong id="cameraDisplay">—</strong></div>
+          <div class="hero-card"><span>Resolution</span><strong id="resolution">—</strong></div>
+          <div class="hero-card"><span>Frame Rate</span><strong id="fps">—</strong></div>
+          <div class="hero-card"><span>Bitrate</span><strong id="bitrate">—</strong></div>
+        </div>
+
+        <div class="grid two">
+          <div class="card"><h3>Codec & Container</h3><dl id="encodingList"></dl></div>
+          <div class="card"><h3>Color</h3><dl id="colorList"></dl></div>
+          <div class="card"><h3>Camera / Lens</h3><dl id="cameraList"></dl></div>
+          <div class="card"><h3>Audio / Side Data</h3><dl id="sideList"></dl></div>
+        </div>
+
+        <div class="card">
+          <h3>Lens / Gyro / Telemetry Clues</h3>
+          <div id="gyroStatus" class="pill">—</div>
+          <ul id="gyroList" class="clue-list"></ul>
+        </div>
+
+        <div class="card">
+          <h3>Metadata Highlights</h3>
+          <table id="metadataTable"><tbody></tbody></table>
+        </div>
+
+        <details class="raw"><summary>Raw JSON from tools</summary><pre id="rawJson"></pre></details>
+      </section>
+    </main>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>

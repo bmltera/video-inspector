@@ -1,0 +1,73 @@
+{
+  "name": "video-inspector-windows",
+  "version": "0.1.0",
+  "description": "Windows drag-and-drop video metadata inspector for camera, codec, color, bitrate, lens, and gyro clues.",
+  "main": "src/main/main.js",
+  "author": "Hermes Agent",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/analyzer.test.js",
+    "build:dir": "electron-builder --dir --win --x64",
+    "build:portable": "electron-builder --win portable --x64",
+    "build:installer": "electron-builder --win nsis --x64",
+    "build:win": "electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.fadedgo.videoinspector",
+    "productName": "Video Inspector",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "package.json",
+      "README.md"
+    ],
+    "extraResources": [
+      {
+        "from": "tools",
+        "to": "tools",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "VideoInspector-${version}-Windows-${arch}.${ext}"
+    },
+    "portable": {
+      "artifactName": "VideoInspector-${version}-Portable-${arch}.${ext}"
+    },
+    "nsis": {
+      "artifactName": "VideoInspectorSetup-${version}-${arch}.${ext}",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Video Inspector",
+      "uninstallDisplayName": "Video Inspector"
+    }
+  }
+}

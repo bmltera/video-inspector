@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Electron Builder output
+release/
+release-*/
+dist/
+out/
+*.blockmap
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local environment/secrets
+.env
+.env.*
+!.env.example
