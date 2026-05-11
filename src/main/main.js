@@ -7,13 +7,35 @@ const { analyzeVideo, discoverTools } = require('./videoAnalyzer');
 app.disableHardwareAcceleration();
 
 function appendLog(line) {
+  const text = `[${new Date().toISOString()}] ${line}\n`;
+  const locations = [];
   try {
-    const logDir = app.isReady() ? app.getPath('userData') : process.cwd();
-    fs.appendFileSync(path.join(logDir, 'video-inspector-debug.log'), `[${new Date().toISOString()}] ${line}\n`);
+    locations.push(path.join(app.getPath('temp'), 'Video Inspector', 'video-inspector-startup.log'));
   } catch (_) {}
+  try {
+    if (app.isReady()) locations.push(path.join(app.getPath('userData'), 'video-inspector-debug.log'));
+  } catch (_) {}
+  locations.push(path.join(process.cwd(), 'video-inspector-debug.log'));
+
+  for (const file of [...new Set(locations)]) {
+    try {
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      fs.appendFileSync(file, text);
+    } catch (_) {}
+  }
 }
 
+process.on('uncaughtException', (err) => {
+  appendLog(`uncaughtException: ${err.stack || err}`);
+  try { dialog.showErrorBox('Video Inspector startup error', String(err.stack || err)); } catch (_) {}
+});
+
+process.on('unhandledRejection', (err) => {
+  appendLog(`unhandledRejection: ${err && err.stack ? err.stack : err}`);
+});
+
 function createWindow() {
+  appendLog(`createWindow appPath=${app.getAppPath()} resourcesPath=${process.resourcesPath} cwd=${process.cwd()}`);
   const win = new BrowserWindow({
     width: 1240,
     height: 820,

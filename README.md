@@ -82,10 +82,10 @@ npm run build:installer
 The NSIS installer will be created under:
 
 ```text
-release\VideoInspectorSetup-0.1.0-x64.exe
+release\VideoInspectorSetup-0.1.1-x64.exe
 ```
 
-It creates Start Menu/Desktop shortcuts, installs into a normal Windows app location, and registers an uninstaller in Windows “Add or remove programs”.
+It creates Start Menu/Desktop shortcuts, installs into a normal Windows app location, registers an uninstaller in Windows “Add or remove programs”, and launches Video Inspector from the final installer screen.
 
 To build only the portable app:
 
@@ -102,7 +102,7 @@ npm run build:portable
 The portable app will be created under:
 
 ```text
-release\VideoInspector-0.1.0-Portable-x64.exe
+release\VideoInspector-0.1.1-Portable-x64.exe
 ```
 
 ## GitHub Actions builds

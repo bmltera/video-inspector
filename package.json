@@ -1,6 +1,6 @@
 {
   "name": "video-inspector-windows",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Windows drag-and-drop video metadata inspector for camera, codec, color, bitrate, lens, and gyro clues.",
   "main": "src/main/main.js",
   "author": "Hermes Agent",
@@ -64,10 +64,12 @@
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
+      "createDesktopShortcut": "always",
       "createStartMenuShortcut": true,
       "shortcutName": "Video Inspector",
-      "uninstallDisplayName": "Video Inspector"
+      "uninstallDisplayName": "Video Inspector",
+      "runAfterFinish": true,
+      "requestedExecutionLevel": "asInvoker"
     }
   }
 }
